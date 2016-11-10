@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,23 +10,22 @@ namespace CarFuel.Models {
     public class Car {
 
         public Car() {
-            Make = "Make";
-            Modal = "Model";
+            Make = "Honda";
+            Modal = "City";
             FillUps = new HashSet<FillUp>();
         }
-
-        public virtual ICollection<FillUp> FillUps { get; set; }
-
+      
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid id { get; set; }
-
         [Required]
         [StringLength(20)]
+        [Description("Make")]
         public string Make { get; set; }
 
         [Required]
-        [StringLength(30)]
+        [StringLength(30)]       
         public string Modal { get; set; }
+        public virtual ICollection<FillUp> FillUps { get; set; }
 
         public double? AverageConsumptionRate {
             get {
@@ -60,27 +60,24 @@ namespace CarFuel.Models {
                 }
 
                 int? totalDistance = FillUps.Sum(f => f.Distance);
-                double? totalLiters = FillUps.Sum(f => f.Liters) - FillUps.FirstOrDefault()?.Liters;
+                
+                double? totalLiters = FillUps.Sum(f => f.Liters) - FillUps.OrderBy(f => f.Odometer).FirstOrDefault()?.Liters;
 
                 return Math.Round((totalDistance / totalLiters) ?? 0.0, 2, MidpointRounding.AwayFromZero);
 
             }
 
         }
-
-
         public FillUp AddFillUp(int odometer, double liters) {
             var f = new FillUp() {
                 Odometer = odometer,
-                Liters = liters            };
-
+                Liters = liters  };
             //if (FillUps.Count > 0) {
-
             //    FillUps[FillUps.Count - 1].NextFillUp = f;
             //}
             if (FillUps.Any<FillUp>()) {
 
-                FillUps.Last().NextFillUp = f;
+                FillUps.OrderBy(x => x.Odometer).Last().NextFillUp = f;
             }
 
             FillUps.Add(f);

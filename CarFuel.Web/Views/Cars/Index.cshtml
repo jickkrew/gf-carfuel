@@ -10,8 +10,10 @@
 @foreach(var c in Model) {
     <div>
         @c.Make / @c.Modal
+       (@c.AverageConsumptionRate Km/L.)
     </div>
 
 }
+<br/>
 Total = @Model.Count() cars.
 

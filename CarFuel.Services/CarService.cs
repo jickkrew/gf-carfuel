@@ -16,5 +16,13 @@ namespace CarFuel.Services {
             return Query(x => x.id == id).SingleOrDefault();
             throw new NotImplementedException();
         }
+
+        public override Car Add(Car item) {
+      
+            if (All().Any(c => c.Make == item.Make)) {
+                throw new Exception("Cannot duplicate car's make.");
+            }
+            return base.Add(item);
+        }
     }
 }
