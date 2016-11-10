@@ -34,7 +34,7 @@ namespace CarFuel.Web
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterType<CarRepository>().As<IRepository<Car>>();
-            builder.RegisterType<CarService>().As<IRepository<Car>>();   
+            builder.RegisterType<CarService>().As<IService<Car>>();   
             builder.RegisterType<CarFuelDb>().As<DbContext>();
 
             var container = builder.Build();

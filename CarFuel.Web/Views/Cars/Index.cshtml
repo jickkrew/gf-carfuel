@@ -1,9 +1,17 @@
-﻿
+﻿@using CarFuel.Models
+@model IEnumerable<Car>
 @{
     ViewBag.Title = "Cars";
 }
 
 <h2>Cars</h2>
 
-Display all current user's cars here...
+
+@foreach(var c in Model) {
+    <div>
+        @c.Make / @c.Modal
+    </div>
+
+}
+Total = @Model.Count() cars.
 
