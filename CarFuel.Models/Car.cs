@@ -13,6 +13,7 @@ namespace CarFuel.Models {
             Make = "Honda";
             Model = "City";
             FillUps = new HashSet<FillUp>();
+            PlateNo = DateTime.Now.Millisecond.ToString();
         }
       
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -75,6 +76,11 @@ namespace CarFuel.Models {
             }
 
         }
+
+        //Nextcar
+        [StringLength(40)]
+        public string Owner { get; set; }
+
         public FillUp AddFillUp(int odometer, double liters) {
             var f = new FillUp() {
                 Odometer = odometer,

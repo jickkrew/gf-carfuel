@@ -3,6 +3,7 @@ using Autofac.Integration.Mvc;
 using CarFuel.Data;
 using CarFuel.Models;
 using CarFuel.Services;
+using CarFuel.Web.Services;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -34,7 +35,8 @@ namespace CarFuel.Web
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterType<CarRepository>().As<IRepository<Car>>();
-            builder.RegisterType<CarService>().As<IService<Car>>();   
+            builder.RegisterType<CarService>().As<IService<Car>>();
+            builder.RegisterType<UserService>().As<IUserService>();
             builder.RegisterType<CarFuelDb>().As<DbContext>();
 
             var container = builder.Build();

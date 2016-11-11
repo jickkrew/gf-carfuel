@@ -8,7 +8,11 @@ using CarFuel.Data;
 
 namespace CarFuel.Services {
     public class CarService : ServiceBase<Car> {
-        public CarService(IRepository<Car> baseRepo) : base(baseRepo) {
+
+        private readonly IUserService _userService;
+        public CarService(IRepository<Car> baseRepo ,
+                          IUserService userService) : base(baseRepo) {
+            _userService = userService;
         }
 
         public override Car Find(params object[] keys) {
@@ -17,11 +21,23 @@ namespace CarFuel.Services {
             throw new NotImplementedException();
         }
 
+
+        public override IQueryable<Car> All() {
+            return base.Query(c => c.Owner == _userService.CurrentUserId());
+        }
+
         public override Car Add(Car item) {
 
-            if (All().Any(c => c.PlateNo == item.PlateNo)) {
-                throw new Exception("Cannot duplicate car's PlateNo.");
+         
+              if (All().Any(c => c.PlateNo == item.PlateNo)) {
+                  throw new Exception("Cannot duplicate car's PlateNo.");
+              }
+
+            if (All().Count() >= 2) {
+                throw new Exception("Cannot add more car.");
             }
+
+            item.Owner = _userService.CurrentUserId();
             return base.Add(item);
         }
     }
