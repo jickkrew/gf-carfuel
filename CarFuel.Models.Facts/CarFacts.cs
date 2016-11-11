@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
-
+using Should;
 namespace CarFuel.Models.Facts {
   public class CarFacts {
 
@@ -14,10 +14,16 @@ namespace CarFuel.Models.Facts {
       [Fact]
       public void NewCar() {
         Car c = new Car();
-        Assert.Equal("Make", c.Make);
-        Assert.Equal("Model", c.Model);
-        Assert.NotNull(c.FillUps);
-        Assert.Empty(c.FillUps);
+
+                c.Make.ShouldEqual("Make");
+                c.Make.ShouldEqual("Model");
+                c.FillUps.ShouldNotBeNull();
+                c.FillUps.ShouldBeEmpty();
+
+        //Assert.Equal("Make", c.Make);
+        //Assert.Equal("Model", c.Model);
+        //Assert.NotNull(c.FillUps);
+        //Assert.Empty(c.FillUps);
 
       }
     }
