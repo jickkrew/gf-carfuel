@@ -4,3 +4,4 @@ packages/
 .vs/
 Result.html
 *.tmp/
+.sln/
