@@ -27,6 +27,11 @@ namespace CarFuel.Web.Controllers
 
         private void CreateTestCar() {
             Car c = new Car();
+            c.Make = "Honda";
+            c.Model = "Jazz";
+            c.PlateNo = "9999";
+
+
             FillUp f1 = c.AddFillUp(odometer: 1000, liters: 40.0);
             FillUp f2 = c.AddFillUp(odometer: 1600, liters: 50.0);
             FillUp f3 = c.AddFillUp(odometer: 2200, liters: 60.0);

@@ -11,12 +11,19 @@ namespace CarFuel.Models {
 
         public Car() {
             Make = "Honda";
-            Modal = "City";
+            Model = "City";
             FillUps = new HashSet<FillUp>();
         }
       
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid id { get; set; }
+
+        [Required,StringLength(10)]
+        public string PlateNo { get; set; }
+
+        [StringLength(30)]
+        public string Color { get; set; }
+
         [Required]
         [StringLength(20)]
         [Description("Make")]
@@ -24,7 +31,7 @@ namespace CarFuel.Models {
 
         [Required]
         [StringLength(30)]       
-        public string Modal { get; set; }
+        public string Model { get; set; }
         public virtual ICollection<FillUp> FillUps { get; set; }
 
         public double? AverageConsumptionRate {

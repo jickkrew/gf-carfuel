@@ -15,7 +15,7 @@ namespace CarFuel.Models.Facts {
       public void NewCar() {
         Car c = new Car();
         Assert.Equal("Make", c.Make);
-        Assert.Equal("Model", c.Modal);
+        Assert.Equal("Model", c.Model);
         Assert.NotNull(c.FillUps);
         Assert.Empty(c.FillUps);
 

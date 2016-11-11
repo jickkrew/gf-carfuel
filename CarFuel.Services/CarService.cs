@@ -19,9 +19,9 @@ namespace CarFuel.Services {
 
         public override Car Add(Car item) {
       
-            if (All().Any(c => c.Make == item.Make)) {
-                throw new Exception("Cannot duplicate car's make.");
-            }
+            //if (All().Any(c => c.Make == item.Make)) {
+            //    throw new Exception("Cannot duplicate car's make.");
+            //}
             return base.Add(item);
         }
     }

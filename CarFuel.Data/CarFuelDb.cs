@@ -13,7 +13,7 @@ namespace CarFuel.Data {
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             modelBuilder
                   .Entity<Car>()
-                  .Property(t => t.Modal)
+                  .Property(t => t.Model)
                   .HasColumnAnnotation("AuthorName", "Veerakit T");
         }
     }
